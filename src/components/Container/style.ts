@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const Content = styled.div`
-    width: 100%;
-
-    display: flex;
-    align-items: center;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
 
     @media screen and (max-width: 1023px) {
         min-width: 100%;

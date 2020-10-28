@@ -1,4 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components';
+import typography from '@/styles/custom/typography';
 
 export default createGlobalStyle` ${css`
     :root {
@@ -27,6 +28,11 @@ export default createGlobalStyle` ${css`
     h6,
     strong {
         font-weight: 600;
+        line-height: 1.4;
+    }
+
+    p {
+        line-height: 2;
     }
 
     button {
@@ -35,5 +41,12 @@ export default createGlobalStyle` ${css`
 
     a {
         text-decoration: none;
+        cursor: pointer;
     }
+
+    section {
+        padding: 3.5rem 1.5rem;
+    }
+
+    ${typography}
 `}`;

@@ -1,8 +1,6 @@
-import Container from '@/components/Container';
-
-import { Nav, NavBrand, NavMenu, NavLogo, NavItem } from './style';
-
 import IMenuItem from '@/dtos/menuItem';
+
+import { Nav, Container, NavBrand, NavMenu, NavLogo, NavItem } from './style';
 
 export interface INavbarProps {
     items: Array<IMenuItem>;

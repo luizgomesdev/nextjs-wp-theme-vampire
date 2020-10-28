@@ -10,6 +10,26 @@ export const Nav = styled.nav`
     background-color: ${(props) => shade(0.1, props.theme.colors.background)};
 `;
 
+export const Container = styled.div`
+    display: flex;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: auto;
+
+    @media screen and (max-width: 1023px) {
+        min-width: 100%;
+    }
+    @media screen and (min-width: 1024px) and (max-width: 1215px) {
+        max-width: 960px;
+    }
+    @media screen and (min-width: 1216px) and (max-width: 1407px) {
+        max-width: 1152px;
+    }
+    @media screen and (min-width: 1408px) {
+        max-width: 1344px;
+    }
+`;
 export const NavBrand = styled.div``;
 
 export const NavMenu = styled.div``;
