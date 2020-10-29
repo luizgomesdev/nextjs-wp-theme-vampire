@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GetStaticProps } from 'next';
 
 import IMenuItem from '@/dtos/menuItem';
@@ -10,10 +11,11 @@ import getAllPosts from '@/services/GetAllPosts';
 
 import Navbar from '@/components/Navbar';
 import Container from '@/components/Container';
-import SpotlightPost from '@/components/SpotlightPost';
+import PostSpotlight from '@/components/PostSpotlight';
+import SideBarPopularPosts from '@/components/SidebarPopularPosts';
+import PostCards from '@/components/PostsCards';
 
-import { Header, Headline, SpotlightSection } from '@/styles/pages/index';
-import { useState } from 'react';
+import { Header, Headline, SpotlightSection, Main, PostsTitleSection, PostsSection } from '@/styles/pages/index';
 
 interface IHomeProps {
     menuItems: IMenuItem[];
@@ -22,6 +24,9 @@ interface IHomeProps {
 }
 
 export default function Home({ menuItems, frontPage, posts }: IHomeProps) {
+    const [lastPost, setLastPost] = useState(posts.slice(0, 1));
+    const [latestPosts, setLatestPosts] = useState(posts.slice(1));
+  
     return (
         <>
             <Navbar items={menuItems} logoUrl="" />
@@ -30,32 +35,45 @@ export default function Home({ menuItems, frontPage, posts }: IHomeProps) {
                 <Container>
                     <Headline dangerouslySetInnerHTML={frontPage && { __html: frontPage.content.rendered }}></Headline>
                     <SpotlightSection>
-                        <SpotlightPost
-                            title={posts[0].title.rendered}
-                            coverImage={posts[0]._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large}
-                            category={posts[0]._embedded['wp:term'][0][0].name}
-                            date={posts[0].date}
-                            author={posts[0]._embedded.author[0].name}
-                            slug={posts[0].slug}
-                            excerpt={posts[0].excerpt.rendered}
+                        <PostSpotlight
+                            id={lastPost[0].id}
+                            title={lastPost[0].title.rendered}
+                            coverImage={lastPost[0]._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large}
+                            category={lastPost[0]._embedded['wp:term'][0][0].name}
+                            date={lastPost[0].date}
+                            author={lastPost[0]._embedded.author[0].name}
+                            slug={lastPost[0].slug}
+                            excerpt={lastPost[0].excerpt.rendered}
                         />
 
-                        <aside>
-                            <div>
-                                <button></button>
-                                <button></button>
-                            </div>
-                            <div>
-                                <img src="" alt="" />
-                                <div>
-                                    <p>Data</p>
-                                    <h3>Título</h3>
-                                </div>
-                            </div>
-                        </aside>
+                        <SideBarPopularPosts popularPosts={latestPosts.slice(0, 4)} />
                     </SpotlightSection>
                 </Container>
             </Header>
+
+            <Main>
+                <Container>
+                    <PostsTitleSection>
+                        <h2>Últimos posts</h2>
+                    </PostsTitleSection>
+
+                    <PostsSection>
+                        {latestPosts &&
+                            latestPosts.map((post) => (
+                                <PostCards
+                                    id={post.id}
+                                    title={post.title.rendered}
+                                    coverImage={post._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large}
+                                    category={post._embedded['wp:term'][0][0].name}
+                                    date={post.date}
+                                    author={post._embedded.author[0].name}
+                                    slug={post.slug}
+                                    excerpt={post.excerpt.rendered}
+                                />
+                            ))}
+                    </PostsSection>
+                </Container>
+            </Main>
         </>
     );
 }

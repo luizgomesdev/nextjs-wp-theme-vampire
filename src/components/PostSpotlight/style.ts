@@ -15,6 +15,7 @@ export const Container = styled.article<ContainerProps>`
 
     color: #fff;
 
+    height: 100%;
     min-height: 450px;
 
     display: flex;
@@ -23,4 +24,10 @@ export const Container = styled.article<ContainerProps>`
     /* filter: brightness(0.5); */
 `;
 export const WrapperContent = styled.div``;
-export const Category = styled.div``;
+export const Category = styled.small`
+    display: inline-block;
+    background: linear-gradient(to right, ${(props) => props.theme.colors.secondary}, ${(props) => props.theme.colors.primary});
+    padding: 0.5rem 1rem;
+
+    border-radius: 128px;
+`;

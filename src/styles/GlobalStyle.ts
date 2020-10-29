@@ -2,10 +2,6 @@ import { createGlobalStyle, css } from 'styled-components';
 import typography from '@/styles/custom/typography';
 
 export default createGlobalStyle` ${css`
-    :root {
-        --color-gray: #494a50;
-    }
-
     * {
         margin: 0;
         padding: 0;
@@ -41,7 +37,13 @@ export default createGlobalStyle` ${css`
 
     a {
         text-decoration: none;
+        color: ${(props) => props.theme.colors.text};
         cursor: pointer;
+
+        &:visited,
+        :active {
+            color: unset;
+        }
     }
 
     section {

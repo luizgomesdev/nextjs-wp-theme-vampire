@@ -20,8 +20,8 @@ export default function ThemeSwitch({ onChangeAction }) {
                 handleDiameter={18}
                 offHandleColor={shade(0.1, colors.secondary)}
                 offColor={colors.secondary}
-                onHandleColor={shade(0.1, colors.primary)}
-                onColor={colors.primary}
+                onHandleColor={shade(0.1, colors.secondary)}
+                onColor={colors.secondary}
             />
         </SwitchContainer>
     );
